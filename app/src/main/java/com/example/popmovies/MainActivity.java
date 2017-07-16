@@ -2,6 +2,7 @@ package com.example.popmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -36,7 +37,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         setContentView(R.layout.activity_main);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_movies);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager;
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            layoutManager = new GridLayoutManager(this, 2);
+        }
+        else{
+            layoutManager = new GridLayoutManager(this, 4);
+        }
+
         mRecyclerView.setLayoutManager(layoutManager);
 
         mRecyclerView.setHasFixedSize(true);
