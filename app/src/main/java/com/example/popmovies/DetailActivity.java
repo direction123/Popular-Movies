@@ -9,14 +9,17 @@ import android.widget.TextView;
 import org.json.JSONObject;
 import com.example.popmovies.utilities.MovieJsonUtils;
 import com.squareup.picasso.Picasso;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
     private String baseImageUrl = "http://image.tmdb.org/t/p/w185/";
-    private TextView mMovieTitle;
-    private TextView movieReleaseDate;
-    private ImageView mMoviePoster;
-    private TextView mMovieVoteAverage;
-    private TextView mMoviePlotSynopsis;
+    @BindView(R.id.movie_title) TextView mMovieTitle;
+    @BindView(R.id.movie_release_date) TextView movieReleaseDate;
+    @BindView(R.id.movie_poster) ImageView mMoviePoster;
+    @BindView(R.id.movie_vote_average) TextView mMovieVoteAverage;
+    @BindView(R.id.movie_plot_synopsis) TextView mMoviePlotSynopsis;
+
     private String mMovieData;
     private JSONObject mMovieJSON;
 
@@ -25,12 +28,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mMovieTitle = (TextView) findViewById(R.id.movie_title);
-        movieReleaseDate = (TextView) findViewById(R.id.movie_release_date);
-        mMoviePoster = (ImageView) findViewById(R.id.movie_poster);
-        mMovieVoteAverage = (TextView) findViewById(R.id.movie_vote_average);
-        mMoviePlotSynopsis = (TextView) findViewById(R.id.movie_plot_synopsis);
-
+        ButterKnife.bind(this);
 
         Intent intentThatStartedThisActivity = getIntent();
 
@@ -52,8 +50,7 @@ public class DetailActivity extends AppCompatActivity {
                 String voteAverage = MovieJsonUtils.getVoteAverage(mMovieJSON) + "/10";
                 mMovieVoteAverage.setText(voteAverage);
 
-                String plotSynopsis = MovieJsonUtils.getPlotSynopsis(mMovieJSON);
-                mMoviePlotSynopsis.setText(plotSynopsis);
+                mMoviePlotSynopsis.setText(MovieJsonUtils.getPlotSynopsis(mMovieJSON));
             }
         }
 
