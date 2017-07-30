@@ -8,6 +8,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,10 +33,14 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.movie_vote_average) TextView mMovieVoteAverage;
     @BindView(R.id.movie_plot_synopsis) TextView mMoviePlotSynopsis;
     @BindView(R.id.movie_favorites) Button mMovieFavorite;
+    @BindView(R.id.recyclerview_movie_trailers)
+    RecyclerView mTrailerRecyclerView;
 
     private String mMovieData;
     private JSONObject mMovieJSON;
     private Uri mUri;
+
+    private MovieTrailerAdapter mMovieTrailerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,16 @@ public class DetailActivity extends AppCompatActivity {
                 } else {
                     mMovieFavorite.setText(R.string.button_favorite);
                 }
+
+                LinearLayoutManager layoutManager =
+                        new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+                mTrailerRecyclerView.setLayoutManager(layoutManager);
+                mTrailerRecyclerView.setHasFixedSize(true);
+                mMovieTrailerAdapter = new MovieTrailerAdapter();
+                mTrailerRecyclerView.setAdapter(mMovieTrailerAdapter);
+
+                String movieID = String.valueOf(MovieJsonUtils.getMoiveID(mMovieJSON));
+                loadMovieTrailer(movieID);
             }
         }
 
@@ -132,5 +149,9 @@ public class DetailActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void loadMovieTrailer(String movieId) {
+        new FetchMovieTrailerTask(mMovieTrailerAdapter).execute(movieId);
     }
 }

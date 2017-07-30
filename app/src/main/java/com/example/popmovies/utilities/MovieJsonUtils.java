@@ -1,5 +1,8 @@
 package com.example.popmovies.utilities;
 
+import android.util.Log;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +18,20 @@ public final class MovieJsonUtils {
     final static String VOTE_AVERAGE_TITLE = "vote_average";
     final static String PLOT_SYNOPSIS_TITLE = "overview";
 
+    public static String[] getMovieListJsonStrings (String movieJsonStr) throws JSONException {
+        final String MOVIE_LIST = "results";
+
+        String[] movieListJSONString;
+
+        JSONObject movieJson = new JSONObject(movieJsonStr);
+        JSONArray movieArray = movieJson.getJSONArray(MOVIE_LIST);
+
+        movieListJSONString = new String[movieArray.length()];
+        for (int i = 0; i < movieArray.length(); i++) {
+            movieListJSONString[i] = movieArray.getJSONObject(i).toString();
+        }
+        return movieListJSONString;
+    }
 
     public static JSONObject getJsonFromString (String jsonStr) {
         JSONObject movieJson = null;
