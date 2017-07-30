@@ -100,7 +100,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-
             <TextView
                 android:id="@+id/movie_plot_synopsis"
                 android:layout_width="match_parent"
@@ -114,6 +113,24 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/detail_header"/>
 
+            <View
+                android:id="@+id/movie_trailer_hr"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="@color/colorGrey"
+                android:layout_below="@+id/movie_plot_synopsis"/>
+
+            <TextView
+                android:id="@+id/movie_trailer_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/movie_trailer_title"
+                android:textSize="24sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/movie_trailer_hr"/>
+
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview_movie_trailers"
                 android:layout_width="match_parent"
@@ -122,7 +139,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="16dp"
                 android:paddingBottom="16dp"
-                android:layout_below="@+id/movie_plot_synopsis"/>
+                android:layout_below="@+id/movie_trailer_title"/>
 
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>

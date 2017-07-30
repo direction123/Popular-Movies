@@ -79,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
 
                 LinearLayoutManager layoutManager =
-                        new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+                        new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
                 mTrailerRecyclerView.setLayoutManager(layoutManager);
                 mTrailerRecyclerView.setHasFixedSize(true);
                 mMovieTrailerAdapter = new MovieTrailerAdapter();
