@@ -7,7 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.popmovies.utilities.NetworkUtils;
-import com.example.popmovies.utilities.OpenMovieJsonUtils;
+import com.example.popmovies.utilities.MovieListJsonUtils;
 
 import org.json.JSONException;
 
@@ -51,7 +51,7 @@ public class FetchMovieTask extends AsyncTask<Integer, Void, String[]> {
         URL moviePopRequestUrl = NetworkUtils.buildUrl(sortParam);
         try {
             String jsonMovieResponse = NetworkUtils.getResponseFromHttpUrl(moviePopRequestUrl);
-            String[] singleMovieJsonStrings = OpenMovieJsonUtils.getSingleMovieJsonStrings(jsonMovieResponse);
+            String[] singleMovieJsonStrings = MovieListJsonUtils.getMovieListJsonStrings(jsonMovieResponse);
             return singleMovieJsonStrings;
         } catch (IOException e) {
             e.printStackTrace();

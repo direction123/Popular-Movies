@@ -8,6 +8,7 @@ import org.json.JSONObject;
  */
 
 public final class MovieJsonUtils {
+    final static String MOVIE_ID_TITLE = "id";
     final static String TITLE_TITLE = "title";
     final static String RELEASE_DATE_TITLE = "release_date";
     final static String POST_TITLE = "poster_path";
@@ -23,6 +24,18 @@ public final class MovieJsonUtils {
             e.printStackTrace();
         }
         return movieJson;
+    }
+
+    public static int getMoiveID(JSONObject movieJson) {
+        int id = -1;
+        if (movieJson != null) {
+            try {
+                id = movieJson.getInt(MOVIE_ID_TITLE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return id;
     }
 
     public static String getTitle(JSONObject movieJson) {
@@ -84,4 +97,6 @@ public final class MovieJsonUtils {
         }
         return plotSynopsis;
     }
+
+
 }

@@ -2,11 +2,19 @@
     <string name="app_name">Pop Movies</string>
     <string name="detail_name">MovieDetail</string>
     <string name="sort_popular">popular</string>
-    <string name="sort_top_rated">top_rated</string>
-    <string name="image_content">poster</string>
     <string name="menu_popular">Most Popular</string>
-    <string name="menu_top_rated">highest rated</string>
+    <string name="sort_top_rated">top_rated</string>
+    <string name="menu_top_rated">Highest Rated</string>
+    <string name="sort_favorites">favorites</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="image_content">poster</string>
     <string name="error_message">
-        An error has occurred. Please try again.
+        A network error has occurred. Please try again. But you still can view your favorite collections.u
     </string>
+    <string name="favorite_empty_message">
+        You have no favorite movies.
+    </string>
+    <string name="button_favorite">MARK AS FAVORITE</string>
+    <string name="button_unfavorite">UNFAVORITE</string>
+    <string name="content_authority">com.example.popmovies</string>
 </resources>

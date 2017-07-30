@@ -27,7 +27,6 @@ public final class NetworkUtils {
 
     private static final String API_KEY_PARAM = "api_key";
 
-    //add your own themoviedb api key here
     private static final String apiKey = BuildConfig.THE_MOVIE_DB_API_TOKEN;
 
     public static URL buildUrl (Integer options) {
