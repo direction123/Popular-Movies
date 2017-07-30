@@ -82,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
                         new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
                 mTrailerRecyclerView.setLayoutManager(layoutManager);
                 mTrailerRecyclerView.setHasFixedSize(true);
-                mMovieTrailerAdapter = new MovieTrailerAdapter();
+                mMovieTrailerAdapter = new MovieTrailerAdapter(this);
                 mTrailerRecyclerView.setAdapter(mMovieTrailerAdapter);
 
                 String movieID = String.valueOf(MovieJsonUtils.getMoiveID(mMovieJSON));
