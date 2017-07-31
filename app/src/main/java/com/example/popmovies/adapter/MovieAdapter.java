@@ -36,6 +36,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         return mMovieData.length;
     }
 
+    public String[] getMovieDate() {
+        return mMovieData;
+    }
 
     @Override
     public MovieAdapter.MovieAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

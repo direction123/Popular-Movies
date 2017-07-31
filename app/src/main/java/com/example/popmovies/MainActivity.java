@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private TextView mErrorMessageDisplay;
 
     private TextView mFavoriteEmptyMessageDisplay;
+
+    private String[] mMovies;
+    private String MOVIE_LIST;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,19 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mFavoriteEmptyMessageDisplay = (TextView) findViewById(R.id.favorite_empty_message_display);
 
-        loadMovieData(R.string.sort_popular);
+        if(savedInstanceState != null){
+            CharSequence[] cs = savedInstanceState.getCharSequenceArray(MOVIE_LIST);
+            if(cs != null) {
+                int length = cs.length;
+                mMovies = new String[length];
+                for (int i = 0; i < length; i++) {
+                    mMovies[i] = cs[i].toString();
+                }
+                mMovieAdapter.setMoiveData(mMovies);
+            }
+        } else {
+            loadMovieData(R.string.sort_popular);
+        }
     }
 
     @Override
@@ -79,8 +95,29 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     protected void onStop() {
         super.onStop();
+    }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState != null){
+            CharSequence[] cs = savedInstanceState.getCharSequenceArray(MOVIE_LIST);
+            if(cs != null) {
+                int length = cs.length;
+                mMovies = new String[length];
+                for (int i = 0; i < length; i++) {
+                    mMovies[i] = cs[i].toString();
+                }
+                mMovieAdapter.setMoiveData(mMovies);
+            }
+        }
+    }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mMovies = mMovieAdapter.getMovieDate();
+        outState.putCharSequenceArray(MOVIE_LIST, mMovies);
     }
 
     @Override
