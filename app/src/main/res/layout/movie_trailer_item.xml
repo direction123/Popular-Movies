@@ -11,20 +11,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         card_view:cardBackgroundColor="@color/colorWhite"
-        card_view:contentPadding="2dp">
+        card_view:contentPadding="@dimen/layout_padding_border">
 
         <ImageView
             android:id="@+id/play_preview"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
+            android:layout_width="@dimen/trailer_thumbnail_length"
+            android:layout_height="@dimen/trailer_thumbnail_length"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             />
 
         <ImageView
             android:id="@+id/play_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/trailer_player_length"
+            android:layout_height="@dimen/trailer_player_length"
             android:layout_gravity="center"
             tools:src="@drawable/ic_play_circle"
             />

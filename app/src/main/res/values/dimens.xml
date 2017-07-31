@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layout_margin_border">2dp</dimen>
+    <dimen name="layout_margin_s">8dp</dimen>
+    <dimen name="layout_margin_m">16dp</dimen>
+    <dimen name="layout_margin_l">24dp</dimen>
+    <dimen name="layout_padding_border">2dp</dimen>
+    <dimen name="layout_padding_m">16dp</dimen>
+    <dimen name="layout_padding_l">24dp</dimen>
+    <dimen name="layout_padding_xl">32dp</dimen>
+    <dimen name="layout_padding_xxl">40dp</dimen>
+    <dimen name="movie_poster_width">150dp</dimen>
+    <dimen name="movie_poster_height">225dp</dimen>
+    <dimen name="progress_bar_length">42dp</dimen>
+    <dimen name="trailer_thumbnail_length">240dp</dimen>
+    <dimen name="trailer_player_length">48dp</dimen>
+    <dimen name="text_size_s">18sp</dimen>
+    <dimen name="text_size_m">24sp</dimen>
+    <dimen name="text_size_l">30sp</dimen>
+    <dimen name="hr_height">2dip</dimen>
+</resources>
