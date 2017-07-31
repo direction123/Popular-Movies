@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private TextView mFavoriteEmptyMessageDisplay;
 
-    SharedPreferences sharedPref;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,27 +59,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mFavoriteEmptyMessageDisplay = (TextView) findViewById(R.id.favorite_empty_message_display);
 
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        if(!sharedPref.contains(getString(R.string.sharePrefKeySortBy))) {
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putInt(getString(R.string.sharePrefKeySortBy), R.string.sort_favorites);
-            editor.commit();
-            loadMovieData(R.string.sort_popular);
-        } else {
-            int id = sharedPref.getInt(getString(R.string.sharePrefKeySortBy), -1);
-            if (id == R.id.sort_popular) {
-                mMovieAdapter.setMoiveData(null);
-                loadMovieData(R.string.sort_popular);
-            }
-            if (id == R.id.sort_top_rated) {
-                mMovieAdapter.setMoiveData(null);
-                loadMovieData(R.string.sort_top_rated);
-            }
-            if (id == R.id.favorites) {
-                mMovieAdapter.setMoiveData(null);
-                loadFavoriteMovieData();
-            }
-        }
+        loadMovieData(R.string.sort_popular);
     }
 
     @Override
@@ -116,9 +94,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public boolean onOptionsItemSelected(MenuItem item) {
         this.mMenuItem = item;
         int id = item.getItemId();
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(getString(R.string.sharePrefKeySortBy), id);
-        editor.commit();
 
         if (id == R.id.sort_popular) {
             mMovieAdapter.setMoiveData(null);
