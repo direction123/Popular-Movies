@@ -108,15 +108,17 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:paddingBottom="16dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_below="@+id/detail_header"/>
 
             <View
                 android:id="@+id/movie_trailer_hr"
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:background="@color/colorGrey"
                 android:layout_below="@+id/movie_plot_synopsis"/>
 
@@ -140,6 +142,35 @@
                 android:layout_marginTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_below="@+id/movie_trailer_title"/>
+
+            <View
+                android:id="@+id/movie_review_hr"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/colorGrey"
+                android:layout_below="@+id/recyclerview_movie_trailers"/>
+
+            <TextView
+                android:id="@+id/movie_review_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/movie_reivew_title"
+                android:textSize="24sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/movie_review_hr"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_movie_reviewss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_below="@+id/movie_review_title"/>
 
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>

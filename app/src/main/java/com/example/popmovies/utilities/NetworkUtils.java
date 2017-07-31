@@ -27,6 +27,9 @@ public final class NetworkUtils {
     private static final String MOVIE_TRAILER_BASE_URL = "http://api.themoviedb.org/3/movie";
     private static final String TRAILER_SEGMENT = "videos";
 
+    private static final String MOVIE_REVIEW_BASE_URL = "http://api.themoviedb.org/3/movie";
+    private static final String REVIEW_SEGMENT = "reviews";
+
     private static final String API_KEY_PARAM = "api_key";
     private static final String apiKey = BuildConfig.THE_MOVIE_DB_API_TOKEN;
 
@@ -57,6 +60,22 @@ public final class NetworkUtils {
         Uri builtUri = Uri.parse(MOVIE_TRAILER_BASE_URL).buildUpon()
                 .appendPath(movieId)
                 .appendPath(TRAILER_SEGMENT)
+                .appendQueryParameter(API_KEY_PARAM, apiKey)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static URL buildReviewUrl (String movieId) {
+        Uri builtUri = Uri.parse(MOVIE_REVIEW_BASE_URL).buildUpon()
+                .appendPath(movieId)
+                .appendPath(REVIEW_SEGMENT)
                 .appendQueryParameter(API_KEY_PARAM, apiKey)
                 .build();
 

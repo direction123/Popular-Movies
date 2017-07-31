@@ -1,7 +1,9 @@
 package com.example.popmovies;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.popmovies.adapter.MovieAdapter;
+import com.example.popmovies.async.FetchMovieTask;
 import com.example.popmovies.utilities.FavoriteMovieDBUtils;
 
 
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private TextView mErrorMessageDisplay;
 
     private TextView mFavoriteEmptyMessageDisplay;
+
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,27 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mFavoriteEmptyMessageDisplay = (TextView) findViewById(R.id.favorite_empty_message_display);
 
-        loadMovieData(R.string.sort_popular);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if(!sharedPref.contains(getString(R.string.sharePrefKeySortBy))) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt(getString(R.string.sharePrefKeySortBy), R.string.sort_favorites);
+            editor.commit();
+            loadMovieData(R.string.sort_popular);
+        } else {
+            int id = sharedPref.getInt(getString(R.string.sharePrefKeySortBy), -1);
+            if (id == R.id.sort_popular) {
+                mMovieAdapter.setMoiveData(null);
+                loadMovieData(R.string.sort_popular);
+            }
+            if (id == R.id.sort_top_rated) {
+                mMovieAdapter.setMoiveData(null);
+                loadMovieData(R.string.sort_top_rated);
+            }
+            if (id == R.id.favorites) {
+                mMovieAdapter.setMoiveData(null);
+                loadFavoriteMovieData();
+            }
+        }
     }
 
     @Override
@@ -73,6 +99,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.sort_list, menu);
@@ -83,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public boolean onOptionsItemSelected(MenuItem item) {
         this.mMenuItem = item;
         int id = item.getItemId();
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(getString(R.string.sharePrefKeySortBy), id);
+        editor.commit();
 
         if (id == R.id.sort_popular) {
             mMovieAdapter.setMoiveData(null);

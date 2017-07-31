@@ -21,6 +21,8 @@ public final class MovieJsonUtils {
     final static String TRAILER_SITE_TITLE = "site";
     final static String TRAILER_YOUTUBE_SITE = "YouTube";
     final static String TRAILER_PLAY_URL_BASE = "https://www.youtube.com/watch?v=";
+    final static String REVIEW_AUTHOR_TITLE = "author";
+    final static String REVIEW_TEXT_TITLE = "content";
 
     public static String[] getMovieListJsonStrings (String movieJsonStr) throws JSONException {
         final String MOVIE_LIST = "results";
@@ -144,7 +146,6 @@ public final class MovieJsonUtils {
         if (movieTrailerJson != null) {
             try {
                 String trailerKey = movieTrailerJson.getString(TRAILER_KEY_TITLE);
-
                 StringBuilder sb = new StringBuilder();
                 sb.append(TRAILER_PLAY_URL_BASE);
                 sb.append(trailerKey);
@@ -154,5 +155,29 @@ public final class MovieJsonUtils {
             }
         }
         return trailerlUrl;
+    }
+
+    public static String getReviewAuthor(JSONObject movieReviewJson) {
+        String reviewAuthor = null;
+        if (movieReviewJson != null) {
+            try {
+                reviewAuthor = movieReviewJson.getString(REVIEW_AUTHOR_TITLE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return reviewAuthor;
+    }
+
+    public static String getReviewText(JSONObject movieReviewJson) {
+        String reviewText = null;
+        if (movieReviewJson != null) {
+            try {
+                reviewText = movieReviewJson.getString(REVIEW_TEXT_TITLE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return reviewText;
     }
 }

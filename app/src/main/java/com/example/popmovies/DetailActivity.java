@@ -10,15 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import com.example.popmovies.adapter.MovieReviewAdapter;
+import com.example.popmovies.adapter.MovieTrailerAdapter;
+import com.example.popmovies.async.FetchMovieReviewTask;
+import com.example.popmovies.async.FetchMovieTrailerTask;
 import com.example.popmovies.data.FavoriteMovieContract;
 import com.example.popmovies.utilities.MovieJsonUtils;
 import com.squareup.picasso.Picasso;
@@ -33,14 +35,15 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.movie_vote_average) TextView mMovieVoteAverage;
     @BindView(R.id.movie_plot_synopsis) TextView mMoviePlotSynopsis;
     @BindView(R.id.movie_favorites) Button mMovieFavorite;
-    @BindView(R.id.recyclerview_movie_trailers)
-    RecyclerView mTrailerRecyclerView;
+    @BindView(R.id.recyclerview_movie_trailers) RecyclerView mTrailerRecyclerView;
+    @BindView(R.id.recyclerview_movie_reviewss) RecyclerView mReviewRecyclerView;
 
     private String mMovieData;
     private JSONObject mMovieJSON;
     private Uri mUri;
 
     private MovieTrailerAdapter mMovieTrailerAdapter;
+    private MovieReviewAdapter mMovieReviewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,15 +81,27 @@ public class DetailActivity extends AppCompatActivity {
                     mMovieFavorite.setText(R.string.button_favorite);
                 }
 
-                LinearLayoutManager layoutManager =
-                        new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-                mTrailerRecyclerView.setLayoutManager(layoutManager);
+                mTrailerRecyclerView.setLayoutManager(
+                        new LinearLayoutManager(
+                                this, LinearLayoutManager.HORIZONTAL, false
+                        )
+                );
                 mTrailerRecyclerView.setHasFixedSize(true);
                 mMovieTrailerAdapter = new MovieTrailerAdapter(this);
                 mTrailerRecyclerView.setAdapter(mMovieTrailerAdapter);
 
+                mReviewRecyclerView.setLayoutManager(
+                        new LinearLayoutManager(
+                                this, LinearLayoutManager.VERTICAL, false
+                        )
+                );
+                mReviewRecyclerView.setHasFixedSize(true);
+                mMovieReviewAdapter = new MovieReviewAdapter(this);
+                mReviewRecyclerView.setAdapter(mMovieReviewAdapter);
+
                 String movieID = String.valueOf(MovieJsonUtils.getMoiveID(mMovieJSON));
                 loadMovieTrailer(movieID);
+                loadMovieReview(movieID);
             }
         }
 
@@ -153,5 +168,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private void loadMovieTrailer(String movieId) {
         new FetchMovieTrailerTask(mMovieTrailerAdapter).execute(movieId);
+    }
+
+    private void loadMovieReview(String movieId) {
+        new FetchMovieReviewTask(mMovieReviewAdapter).execute(movieId);
     }
 }
