@@ -1,6 +1,6 @@
-# Udacity-Popular-Movies
+# Popular Movies
 
-This is the project of Udacity: Popular Movies. This app helps users discover the most popular movies, and see details of a movie. SQLite Database is used to store the user’s favorite movies.
+This app helps users discover the most popular movies, and see details of a movie. SQLite Database is used to store the user’s favorite movies.
 
 In order to run this project, please first get your own themoviedb api key. Then go to folder [USER_HOME]/.gradle, find the file gradle.properties, add the following line in it: MyTheMovieDBApiToken="XXXXX". (Reference: https://stackoverflow.com/questions/33134031/is-there-a-safe-way-to-manage-api-keys)
 
