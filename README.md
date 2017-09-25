@@ -13,7 +13,8 @@ For Mac, example for Denis user:
 go to /Users/Denis/.gradle, find gradle.properties, add the following line int it: MyTheMovieDBApiToken="XXXXX"
 
 <br/>
-| Screenshot 1  | Screenshot 2 |
-| ------------- | ------------- |
-| <img src="https://github.com/direction123/Popular-Movies/blob/master/screenshots/Screenshot_1506379938.png" width="200">
-  | <img src="https://github.com/direction123/Popular-Movies/blob/master/screenshots/Screenshot_1506379950.png" width="150"> |
+<br/>
+<p float="left">
+  <img src="https://github.com/direction123/Popular-Movies/blob/master/screenshots/Screenshot_1506379938.png" width="200" />
+  <img src="https://github.com/direction123/Popular-Movies/blob/master/screenshots/Screenshot_1506379950.png" width="200" /> 
+</p>
